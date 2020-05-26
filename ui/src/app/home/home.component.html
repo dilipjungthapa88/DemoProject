@@ -1,0 +1,59 @@
+<div class="home-page-content-wrapper">
+
+    <div *ngIf="isLoading">
+        <div class="loader-wrapper">
+            <div class="loader">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="search-wrapper">
+        <form (ngSubmit)="search($event.target.phoneNumber.value)">
+            <input type="text" name="phoneNumber" placeholder="Enter phone number" />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="content-wrapper">
+
+        <div class="content-header">
+            <label for="cars">Items per page:</label>
+            <select name="count-selector" id="count-selector" (change)="onItemChange($event.target.value)"
+                [(ngModel)]="itemsPerPage">
+                <option value="10">10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="500">500</option>
+                <option value="1000">1000</option>
+            </select>
+
+            <p *ngIf="response && response.data"> Showing {{from}} - {{to}} of {{response.totalItems }} records. Page
+                {{response.curPage }} of
+                {{response.totalPages}}</p>
+        </div>
+        <div class="content">
+            <div *ngIf="response && response.data">
+                    <p class="value" *ngFor="let d of response.data">
+                        {{d}}
+                    </p>
+                <div *ngIf="!response.data && response.message">
+                    <p class="error-message">{{response.message}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="pagination">
+        <div *ngIf="response && response.data">
+
+            <button (click)="previousPages()">⏪️</button>
+            <button *ngFor=" let p of pages" [ngClass]="{ 'active' : p == curPageNum }" (click)="goTopage(p)">
+                {{p}}
+            </button>
+            <button (click)="nextPages()">⏩️</button>
+
+        </div>
+    </div>
+</div>
