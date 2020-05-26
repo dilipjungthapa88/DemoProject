@@ -19,7 +19,10 @@ To run the server, go to the server directory and in command line.
  PS. This requires basic authentication [username: FOO, password: FOOPW] 
   
  To run the ui, go to the ui directory and open command line.
-	1. npm intall
-  	2. ng serve   (do 'npm install -g @angular/cli' first if angular cli is not installed)
+ 
+ 1. npm install
+
+ 2. ng serve
+
   
   The web app can now be accessed at localhost:4200
